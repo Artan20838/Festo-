@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <style>
+    /* Container styling */
+    .container {
+      text-align: center;
+      margin-top: 50px;
+      font-family: Arial, sans-serif;
+    }
+    
+    /* Animation for floating shapes */
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      background-color: rgba(255, 255, 255, 0.6);
+      animation: float 10s infinite alternate ease-in-out;
+    }
+    
+    /* Keyframes for floating shapes */
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50vh); }
+    }
+    
+    /* Fade-in animation */
+    .fade-in {
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Theme switcher */
+    body.light-mode { background-color: white; color: black; }
+    body.dark-mode { background-color: black; color: white; }
+    
+    /* Styling for input, button, and elements */
+    #nameInput, #change-text-btn, #quote-btn, #theme-btn {
+      margin: 10px;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    
+    /* Random quote styling */
+    #quoteDisplay {
+      font-style: italic;
+      margin: 20px;
+    }
+  </style>
+</head>
+
+<body class="light-mode">
+  <!-- Floating background shapes -->
+  <script>
+    function createShapes() {
+      for (let i = 0; i < 20; i++) {
+        let shape = document.createElement('div');
+        shape.classList.add('shape');
+        shape.style.left = Math.random() * window.innerWidth + 'px';
+        shape.style.top = Math.random() * window.innerHeight + 'px';
+        document.body.appendChild(shape);
+      }
+    }
+    createShapes();
+  </script>
+  
+  <!-- Page content -->
+  <div class="container">
+    <h1 id="welcome-text" class="fade-in">Welcome to JavaScript</h1>
+    <p class="intro-text">Click the button below to explore the magic of JavaScript!</p>
+    
+    <!-- Input for custom greeting -->
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="updateGreeting()">Submit</button>
+
+    <!-- Button to change the welcome text -->
+    <button id="change-text-btn" onclick="changeText()">Click Me</button>
+
+    <!-- Button to toggle theme -->
+    <button id="theme-btn" onclick="toggleTheme()">Toggle Theme</button>
+
+    <!-- Random Quote Button and Display -->
+    <p id="quoteDisplay">Click the button below to see a quote!</p>
+    <button id="quote-btn" onclick="displayQuote()">Get Quote</button>
+  </div>
+
+  <script>
+    // Change welcome text
+    function changeText() {
+      const welcomeText = document.getElementById('welcome-text');
+      welcomeText.textContent = 'You clicked the button! Welcome to the world of JavaScript!';
+      welcomeText.style.color = 'blue';
+    }
+
+    // Update greeting based on name input
+    function updateGreeting() {
+      const name = document.getElementById('nameInput').value;
+      document.getElementById('welcome-text').textContent = `Welcome to JavaScript, ${name}!`;
+    }
+
+    // Theme switcher function
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle('light-mode');
+    }
+
+    // Random quote generator
+    const quotes = [
+      "JavaScript is the language of the web!",
+      "Code is like humor. When you have to explain it, it’s bad.",
+      "Debugging is like being the detective in a crime movie where you are also the murderer.",
+    ];
+    
+    function displayQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      document.getElementById('quoteDisplay').textContent = quotes[randomIndex];
+    }
+  </script>
+</body>
+</html>
